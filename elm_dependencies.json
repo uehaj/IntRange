@@ -1,0 +1,10 @@
+{
+    "summary": "IntRange",
+    "repository": "https://github.com/uehaj/IntRange.git",
+    "dependencies": {},
+    "exposed-modules": ["IntRange"],
+    "version": "0.1.0",
+    "elm-version": "0.13",
+    "license": "BSD3",
+    "description": "The library make fold or map to the range of numbers without consuming memory."
+}
