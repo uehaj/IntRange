@@ -1,10 +1,10 @@
 {
-    "summary": "IntRange",
+    "summary": "Iterates consequent range of int numbers without consuming memory.",
     "repository": "https://github.com/uehaj/IntRange.git",
     "dependencies": {},
     "exposed-modules": ["IntRange"],
-    "version": "0.1.0",
-    "elm-version": "0.13",
+    "version": "0.1.2",
+    "elm-version": "0.12.3",
     "license": "BSD3",
-    "description": "The library make fold or map to the range of numbers without consuming memory."
+    "description": "This library provides fold*/map/zip* functions which iterates consequent number range of Int without consuming extra memory."
 }
