@@ -7,12 +7,11 @@ module IntRange(IntRange
                , zipWith
                , toList
                ) where
-{-| The library provides fold/map/zip to the range of numbers without consuming memory.
+{-| The library provides fold*/map/zip* to the range of numbers without consuming memory.
 
-IntRange.foldl/foldr/maps can be used replacement of [Int] value
-which represents certain range of Int values.
+IntRange.fold*/map/zip* can be used as a replacement of List.fold*/map/zip* on a list of consecutive Int values.
 
-This is useful when iterate vast numbers without consuming memory.
+Using those method reduces memory when iterate on a list which have vast numbers of element and don't use the list after iterate.
 
 For example,
 
@@ -20,12 +19,10 @@ For example,
           import IntRange
           Import List
 
-          IntRange.foldl (+) 0 (0 `to` 100000000) -- Can be calculate without consuming memory.
-          List.foldl (+) 0 [0..100000000] -- Require memory fo the list which length is 100000000.
+          IntRange.foldl (+) 0 (0 `to` 100000000) -- Can be calculated without consuming less memory.
+          List.foldl (+) 0 [0..100000000] -- Require memory for the list which length is 100000000.
 
-Both of List.foldl and IntRange.foldl don't consumes call stack, but
-List.foldl version consumes vast amount of memory in the contrast of
-IntRange.fold requres relatively small constant memory.
+Both of List.foldl and IntRange.foldl don't consume call stack, but List.foldl allocate memory for the list whose length is 100000000. In contrast, IntRange.fold requires relatively less memory. It can be used like counter variable of loop.
 
 # Create IntRange
 @docs to
@@ -76,23 +73,24 @@ zip list range = zipWith (,) list range
 {-| Combine a list and an IntRange, combining them with the given function.
 If one list is longer, the extra elements are dropped.
 
-  zipWith (+) [1,2,3] (1 `to` 4) == [2,4,6]
+      zipWith (+) [1,2,3] (1 `to` 4) == [2,4,6]
 -}
 zipWith : (a -> Int -> c) -> [a] -> IntRange -> [c]
 zipWith func list (IntRange start end) =
     let rangeLen = end-start+1
         listLen = length list
-    in reverse <| if | rangeLen > listLen -> zipWith' func list start (start+listLen-1) []
+    in reverse <| T.trampoline
+               <| if | rangeLen > listLen -> zipWith' func list start (start+listLen-1) []
                      | rangeLen < listLen -> zipWith' func (take rangeLen list) start end []
-                     | otherwise -> zipWith' func list start end []
+                     | otherwise          -> zipWith' func list start end []
 
-zipWith' : (a -> Int -> c) -> [a] -> Int -> Int -> [c] -> [c]
+zipWith' : (a -> Int -> c) -> [a] -> Int -> Int -> [c] -> T.Trampoline [c]
 zipWith' func list start end result =
-    if | start > end -> result
-       | otherwise -> zipWith' func (tail list) (start+1) end ((func (head list) start)::result)
+    if | start > end -> T.Done result
+       | otherwise -> T.Continue(\() -> zipWith' func (tail list) (start+1) end ((func (head list) start)::result))
 
 {-| Create range from two Ints. The range starts with first one and
-    end with second one. both of values are included in the range.
+    ends with second one. Both of values are included in the range.
     In the other word (InRange start end) include both of start and end.
 -}
 to : Int -> Int -> IntRange

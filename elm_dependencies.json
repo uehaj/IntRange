@@ -3,7 +3,7 @@
     "repository": "https://github.com/uehaj/IntRange.git",
     "dependencies": {},
     "exposed-modules": ["IntRange"],
-    "version": "0.1.4",
+    "version": "0.1.5",
     "elm-version": "0.12.3",
     "license": "BSD3",
     "description": "This library provides fold*/map/zip* functions which iterates consecutive number range of Int without consuming extra memory."
