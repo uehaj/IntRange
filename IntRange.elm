@@ -31,7 +31,7 @@ IntRange.fold requres relatively small constant memory.
 @docs to
 
 # Iteration
-@docs foldl, foldr, map, zip
+@docs foldl, foldr, map, zip, zipWith
 
 # Convert
 @docs toList
