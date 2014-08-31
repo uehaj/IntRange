@@ -1,11 +1,6 @@
 module Test where
 import IntRange (..)
 import List
-{-
-tests = [ (zipWith (,) [1..10] (100 `to` 110)) == (List.zipWith (,) [1..10] [100..110])
-        , (zip [1..10] (100 `to` 110)) == (List.zip [1..10] [100..110])
-        , (foldl (+) 0 (1 `to` 10)) == (List.foldl (+) 0 [1..10])
-        ]-}
 
 main = flow down 
        [ plainText . show <| foldl (+) 0 (0 `to` 10000) == 50005000
