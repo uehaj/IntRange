@@ -60,15 +60,15 @@ map2 : (a -> Int -> c) -> List a -> IntRange -> List c
 map2 = Native.IntRange.map2
 
 {-| Create range from two Ints. The range starts with the first argument and
-    ends with the second one. Both of values are included in the range.
-    In the other word (InRange start end) include both of end points.
+    step up by one to the second argument. Both of values are included in the range.
+    In the other words, `(start ``to`` end)` include both of end points.
 -}
 to : Int -> Int -> IntRange
 to a b = IntRange a b False
 
-{-| Create range from two Ints. The range starts with the second argument and
-    ends with the first one. Both of values are included in the range.
-    In the other word (InRange end start) include both of end points.
+{-| Create inverted range from two Ints. The range starts with the first argument and
+    steps down by one to the second argument. Both of values are included in the range.
+    In the other words, `(end ``downTo`` start)` include both of end points.
 -}
 downTo : Int -> Int -> IntRange
 downTo a b = IntRange a b True
