@@ -18,4 +18,11 @@ For example,
       List.foldl (+) 0 [0..100000000] -- Requires memory for the List of Int which length is 100000000.
 ```
 
-Both of List.foldl and IntRange.foldl don't consumes call stack (those are using Trampoline), but List.foldl version consumes memory for the list [0..100000000], in the contrast of IntRange.fold requres relatively small constant memory.
+Both of List.foldl and IntRange.foldl don't consumes call stack, but List.foldl version consumes memory for the list [0..100000000], in the contrast of IntRange.fold requres relatively small constant memory.
+
+You can create range and invert range by functions `to` and `downTo` respectedly:
+
+```
+       IntRange.map (\a->a+1) (1 `to` 3) -- [2,3,4]
+       IntRange.map (\a->a+1) (3 `downTo` 1) -- [4,3,2]
+```

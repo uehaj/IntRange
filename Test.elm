@@ -1,5 +1,5 @@
 module Test where
-import IntRange (IntRange(..),to,downTo,toList,foldl,foldr,map,map2)
+import IntRange (to,downTo,toList,foldl,foldr,map,map2)
 import List as L
 import Text (asText)
 import Graphics.Element (flow,down)
@@ -33,8 +33,4 @@ main = flow down
        , asText << toString <| toList (1 `downTo` 3) == []
        , asText << toString <| toList (3 `downTo` 1) == [3,2,1]
        , asText << toString <| toList (3 `to` 1) == []
-       , asText << toString <| toList (IntRange 1 3 False) == [1,2,3]
-       , asText << toString <| toList (IntRange 1 3 True) == []
-       , asText << toString <| toList (IntRange 3 1 True) == [3,2,1]
-       , asText << toString <| toList (IntRange 3 1 False) == []
        ]

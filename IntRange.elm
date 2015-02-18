@@ -1,12 +1,11 @@
-module IntRange(IntRange(..)
-               , to
-               , downTo               
-               , foldl
-               , foldr
-               , map
-               , map2
-               , toList
-               ) where
+module IntRange(to
+              , downTo               
+              , foldl
+              , foldr
+              , map
+              , map2
+              , toList
+              ) where
 {-| The library provides fold*/map* to the range of numbers without consuming memory.
 
 IntRange.fold*/map* can be used as a replacement of List.fold*/map* on a list of consecutive Int values.
@@ -24,8 +23,9 @@ For example,
 
 Both of List.foldl and IntRange.foldl don't consume call stack, but List.foldl allocate memory for the list whose length is 100000000. In contrast, IntRange.fold requires relatively less memory. It can be used like counter variable of loop.
 
+
 # Create IntRange
-@docs to
+@docs to, downTo
 
 # Iteration
 @docs foldl, foldr, map, map2
@@ -35,14 +35,9 @@ Both of List.foldl and IntRange.foldl don't consume call stack, but List.foldl a
 
 -}
 import List (..)
-import Trampoline as T
 import Native.IntRange
 
 type IntRange = IntRange Int Int Bool
-{-
-type IntRange = UpToRange Int Int -- lower to upper
-              | DownToRange Int Int -- upper to lower
--}
 
 {-| Reduce a range from the left: `(foldl (::) [] (1 `to` 3) == [3,2,1])` -}
 foldl : (Int -> b -> b) -> b -> IntRange -> b
