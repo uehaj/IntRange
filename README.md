@@ -1,7 +1,7 @@
 IntRange
 ========
 
-The library provides fold/map* funcsions for the range of Int numbers avoiding consuming extra memory.
+The library provides fold/map* functions for the range of Int numbers avoiding consuming extra memory.
 
 IntRange.foldl/foldr/map/map2 can be used replacement of List Int value which represents certain range of Int values.
 

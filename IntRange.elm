@@ -81,7 +81,7 @@ map2' func list start end result =
 
 {-| Create range from two Ints. The range starts with first one and
     ends with second one. Both of values are included in the range.
-    In the other word (InRange start end) include both of start and end.
+    In the other word (InRange start end) include both end points.
 -}
 to : Int -> Int -> IntRange
 to a b = IntRange a b
