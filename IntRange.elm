@@ -1,5 +1,6 @@
 module IntRange(IntRange(..)
                , to
+               , downTo               
                , foldl
                , foldr
                , map
@@ -37,7 +38,11 @@ import List (..)
 import Trampoline as T
 import Native.IntRange
 
-type IntRange = IntRange Int Int
+type IntRange = IntRange Int Int Bool
+{-
+type IntRange = UpToRange Int Int -- lower to upper
+              | DownToRange Int Int -- upper to lower
+-}
 
 {-| Reduce a range from the left: `(foldl (::) [] (1 `to` 3) == [3,2,1])` -}
 foldl : (Int -> b -> b) -> b -> IntRange -> b
@@ -59,12 +64,19 @@ If one list is longer, the extra elements are dropped.
 map2 : (a -> Int -> c) -> List a -> IntRange -> List c
 map2 = Native.IntRange.map2
 
-{-| Create range from two Ints. The range starts with first one and
-    ends with second one. Both of values are included in the range.
-    In the other word (InRange start end) include both end points.
+{-| Create range from two Ints. The range starts with the first argument and
+    ends with the second one. Both of values are included in the range.
+    In the other word (InRange start end) include both of end points.
 -}
 to : Int -> Int -> IntRange
-to a b = IntRange a b
+to a b = IntRange a b False
+
+{-| Create range from two Ints. The range starts with the second argument and
+    ends with the first one. Both of values are included in the range.
+    In the other word (InRange end start) include both of end points.
+-}
+downTo : Int -> Int -> IntRange
+downTo a b = IntRange a b True
 
 {-| Convert IntRange to List of Int([Int]).
 -}

@@ -11,34 +11,71 @@ Elm.Native.IntRange.make = function(elm) {
 
     function foldl(f, ini, range) {
         var result = ini;
-        for (var i=range._0; i<=range._1; i++) {
-            result = A2(f, i, result);
+        var inverse = range._2;
+        if (!inverse) {
+            for (var i=range._0; i<=range._1; i++) {
+                result = A2(f, i, result);
+            }
+        }
+        else {
+            for (var i=range._0; i>=range._1; i--) {
+                result = A2(f, i, result);
+            }
         }
         return result;
     }
     function foldr(f, ini, range) {
         var result = ini;
-        for (var i=range._1; i>=range._0; i--) {
-            result = A2(f, i, result);
+        var inverse = range._2;
+        if (!inverse) {
+            for (var i=range._1; i>=range._0; i--) {
+                result = A2(f, i, result);
+            }
+        }
+        else {
+            for (var i=range._1; i<=range._0; i++) {
+                result = A2(f, i, result);
+            }
         }
         return result;
     }
     function map(f, range) {
         var arr = [];
-        for (var i=range._0; i<=range._1; i++) {
-            arr = arr.concat(f(i));
+        var inverse = range._2;
+        if (!inverse) {
+            for (var i=range._0; i<=range._1; i++) {
+                arr.push(f(i));
+            }
+        }
+        else {
+            for (var i=range._0; i>=range._1; i--) {
+                arr.push(f(i));
+            }
         }
         return List.fromArray(arr);
     }
     function map2(f, list, range) {
         var arr = [];
-        for (var i=range._0; i<=range._1; i++) {
-            if (list == Utils.Nil) {
-                break;
+        var inverse = range._2;
+        if (!inverse) {
+            for (var i=range._0; i<=range._1; i++) {
+                if (list == Utils.Nil) {
+                    break;
+                }
+                var elem = list._0;
+                arr.push(A2(f, elem, i));
+                list = list._1;
             }
-            var elem = list._0;
-            arr = arr.concat(A2(f, elem, i));
-            list = list._1;
+        }
+        else {
+            for (var i=range._0; i>=range._1; i--) {
+                if (list == Utils.Nil) {
+                    break;
+                }
+                var elem = list._0;
+                arr.push(A2(f, elem, i));
+                list = list._1;
+            }
         }
         return List.fromArray(arr);
     }
