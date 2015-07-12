@@ -1,12 +1,14 @@
 {
-    "version": "2.0.1",
+    "version": "2.0.0",
     "summary": "Iterates consecutive range of int numbers avoiding consuming extra memory.",
     "repository": "https://github.com/uehaj/IntRange.git",
     "license": "BSD3",
     "source-directories": [
         "."
     ],
-    "exposed-modules": ["IntRange"],
+    "exposed-modules": [
+        "IntRange"
+    ],
     "native-modules": true,
     "dependencies": {
         "elm-lang/core": "2.0.0 <= v < 3.0.0"
