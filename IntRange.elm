@@ -1,5 +1,5 @@
 module IntRange(to
-              , downTo               
+              , downTo
               , foldl
               , foldr
               , map
@@ -34,7 +34,7 @@ Both of List.foldl and IntRange.foldl don't consume call stack, but List.foldl a
 @docs toList
 
 -}
-import List (..)
+import List exposing (..)
 import Native.IntRange
 
 type IntRange = IntRange Int Int Bool
