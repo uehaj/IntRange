@@ -73,7 +73,7 @@ to a b = IntRange a b False
 downTo : Int -> Int -> IntRange
 downTo a b = IntRange a b True
 
-{-| Convert IntRange to List of Int([Int]).
+{-| Convert IntRange to List of Int(List Int).
 -}
 toList : IntRange -> List Int
 toList range = map identity range
